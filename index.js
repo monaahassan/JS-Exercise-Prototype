@@ -39,9 +39,43 @@ Airplane.prototype.land = function () {
         + It should return a string with `name` and `age`. Example: "Mary, 50"
 */
 
-function Person() {
-
+function Person(name, age){
+  this.name = name;
+  this.age = age;
+  this.stomach = [];
 }
+
+Person.prototype.eat = function(edible){
+  if(this.stomach.length < 10){
+    this.stomach.push(edible);
+  }
+}
+
+Person.prototype.poop = function(){
+  this.stomach = [];
+}
+
+Person.prototype.toString = function(){
+  return `${this.name}, ${this.age}`;
+}
+
+const personOne = new Person('Jakobi', 20);
+const personTwo = new Person('Leah', 29);
+const personThree = new Person('Karla', 24);
+
+console.log(personOne.toString());
+console.log(personTwo.toString());
+console.log(personThree.toString());
+
+personOne.eat('🌮');
+personOne.eat('🍕');
+personOne.eat('🍣');
+
+console.log(personOne.stomach);
+
+personOne.poop();
+
+console.log(personOne.stomach);
 
 /*
   TASK 2
@@ -57,9 +91,19 @@ function Person() {
         + The `drive` method should return a string "I ran out of fuel at x miles!" x being `odometer`.
 */
 
-function Car() {
-
-}
+function Car(model, milesPerGallon) {
+  this.model = model;
+  this.milesPerGallon = milesPerGallon;
+  this.tank = 0; 
+  this.odometer = 0
+{
+  Car.prototype.fill = function(gallons){
+    if(this.tank < 100){
+      this.tank = gallons + this.tank
+    }
+  }
+  }
+  }
 
 /*
   TASK 3
@@ -68,18 +112,27 @@ function Car() {
     - Besides the methods on Person.prototype, babies have the ability to `.play()`:
         + Should return a string "Playing with x", x being the favorite toy.
 */
-function Baby() {
 
+
+function Baby(name, age, favoriteToy){
+  Person.call(this, name, age)
+  this.favoriteToy = favoriteToy;
 }
+
+Person.prototype.play = function(){
+  return(`${this.name} is playing with ${this.favoriteToy}`)
+}
+const personFour = new Baby('Boomer', 'Ball')
+
 
 /* 
   TASK 4
 
   In your own words explain the four principles for the "this" keyword below:
-  1. 
-  2. 
-  3. 
-  4. 
+  1. There are four principles of 'this'. First is the window binding, we shouldn't use cause if 'this' has no context it goes to either the window, or global object. 
+  2. Next is Implicit Binding, it is the most used. When we invoke the fx, we should look to the left of it. This only works with objects that have methods. 
+  3. Explict binding has three parts .call, .apply, and .bind. First two will invoke the fx, call passes arguments 1 by 1, .apply passes arguments as an array and .bind passes arguements 1 by 1 but doesnt invoke it right away instead creates a new fx
+  4. New binding uses the keyword and 'this' points to it. 
 */
 
 
